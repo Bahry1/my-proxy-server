@@ -1,35 +1,31 @@
 {
-  "log": {
-    "loglevel": "warning"
-  },
   "inbounds": [
     {
-      "port": 10000,
+      "port": 443,
       "protocol": "vless",
       "settings": {
-        "decryption": "none",
         "clients": [
           {
-            "id": "REPLACE-UUID",
-            "flow": ""
+            "id": "533f1b2440789e12184cc006911d7ed6",
+            "level": 0,
+            "email": "jamshid"
           }
-        ]
+        ],
+        "decryption": "none"
       },
       "streamSettings": {
         "network": "ws",
-        "security": "none",
+        "security": "tls",
         "wsSettings": {
-          "path": "/",
-          "headers": {
-            "Host": "REPLACE-HOST"
-          }
+          "path": "/"
         }
       }
     }
   ],
   "outbounds": [
     {
-      "protocol": "freedom"
+      "protocol": "freedom",
+      "settings": {}
     }
   ]
 }
