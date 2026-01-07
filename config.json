@@ -7,25 +7,19 @@
         "clients": [
           {
             "id": "533f1b2440789e12184cc006911d7ed6",
-            "level": 0,
-            "email": "jamshid"
+            "flow": "xtls-rprx-vision"
           }
-        ],
-        "decryption": "none"
+        ]
       },
       "streamSettings": {
-        "network": "ws",
-        "security": "tls",
-        "wsSettings": {
-          "path": "/"
-        }
+        "network": "tcp",
+        "security": "tls"
       }
     }
   ],
   "outbounds": [
     {
-      "protocol": "freedom",
-      "settings": {}
+      "protocol": "freedom"
     }
   ]
 }
