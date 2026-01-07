@@ -1,23 +1,29 @@
-// server.js
-// Final version - Simple HTTP Proxy Server
+const express = require('express');
+const { createServer } = require('http');
+const { WebSocketServer } = require('ws');
 
-const http = require('http');
-const httpProxy = require('http-proxy');
+const app = express();
 
-// ایجاد پروکسی
-const proxy = httpProxy.createProxyServer({});
-
-// ساخت سرور
-const server = http.createServer((req, res) => {
-  proxy.web(req, res, { target: 'http://example.com' }, (err) => {
-    console.error('Proxy error:', err);
-    res.writeHead(500, { 'Content-Type': 'text/plain' });
-    res.end('Proxy error');
-  });
+// مسیر ساده برای تست
+app.get('/', (req, res) => {
+  res.send('VLESS WebSocket server is running');
 });
 
-// پورت از محیط Render یا لوکال
-const PORT = process.env.PORT || 3000;
+// ساخت سرور HTTP
+const server = createServer(app);
+
+// WebSocket روی مسیر /
+const wss = new WebSocketServer({ server, path: '/' });
+
+wss.on('connection', (ws, req) => {
+  console.log('New WS connection from', req.socket.remoteAddress);
+  ws.on('message', (msg) => {
+    console.log('Received:', msg.toString());
+  });
+  ws.send('Welcome to VLESS WS server');
+});
+
+const PORT = process.env.PORT || 443;
 server.listen(PORT, () => {
-  console.log(`Proxy server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
